@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using DATA;
+using GamePlay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 
 namespace Managers
@@ -17,12 +15,13 @@ namespace Managers
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _finalScoreText; 
-        [SerializeField] private List<Transform> _answerButtons;
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private QuizSO QuizSO;
         [SerializeField] private ScoreSO _scoreSO;
         [SerializeField] private float _startTime = 60f;
+        [SerializeField] private ButtonManager _buttonManager;
         private float _countdown = 0f;
+        
  
   
 
@@ -32,8 +31,13 @@ namespace Managers
 
             _questions.text = QuizSO.GetQuestion();
             _countdown = _startTime;
-            ShuffleButtons();
-        
+
+            foreach (Transform buttonChild in _buttonManager.transform)
+            {
+                buttonChild.GetComponent<ButtonHandler>().Inject(this);
+                
+            }
+            
         }
 
         private void Update()
@@ -51,7 +55,6 @@ namespace Managers
             {
                 _scoreSO.Score = 0;
             }
-            Debug.Log("Points is Counting");
             
         }
 
@@ -68,14 +71,7 @@ namespace Managers
             
             }
         }
-
-        private void ShuffleButtons()
-        {
-
-            int randomindex = UnityEngine.Random.Range(0, _answerButtons.Count);
-            Transform buttonsSpawner = _answerButtons[randomindex];
-
-        }
+        
         
         public void CHeckAnswers(ColorID SelectedColorID)
         {
@@ -86,6 +82,16 @@ namespace Managers
                 _feedbacktext.text = "Correct";
                 _gameManager.ColorSelector();
                 _scoreSO.Score++;
+                ButtonManager buttonManager = FindObjectOfType<ButtonManager>();
+                if (buttonManager != null)
+                {
+                    buttonManager.ButtonToShuffle();
+                    foreach (Transform buttonChild in _buttonManager.transform)
+                    {
+                        buttonChild.GetComponent<ButtonHandler>().Inject(this);
+                
+                    }
+                }
 
             }
             else
@@ -95,7 +101,10 @@ namespace Managers
                 _scoreSO.Score--;
                 _countdown -= 5f;
             }
+            
         }
+        
+        
 
         public void Mainmenu(string levelName)
         {

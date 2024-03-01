@@ -4,41 +4,24 @@ using UnityEngine;
 namespace DATA
 {
     [CreateAssetMenu (fileName = "QuestionMaker")]
+    // ScriptableObject to store quiz data
     public class QuizSO : ScriptableObject
     {
+        // List to store ColorData objects
         public List<ColorData> ColorList;
+        // Variable to store the ID of the ColorData
         public ColorID ColorDataID;
+        // Serialized field to store the question text, with a TextArea attribute for better editor display
         [TextArea(1,6)] 
         [SerializeField] private string Question = "Enter Question text ";
-    
-
         public string GetQuestion()
         {
             return Question;
         }
-    
-    
-        public  ColorID GetrandomColor(List<ColorData> colorlist)
-        {
-            if (colorlist == null || colorlist.Count == 0)
-            {
-                Debug.LogWarning("ColorList is empty, returning to default color ");
-                return ColorID.Red;
-            }
-
-            int randomindex = UnityEngine.Random.Range(0, colorlist.Count);
-            return colorlist[randomindex].ColorID;
-        }
 
         public ColorID GetrandomColor()
         {
-
             return ColorList[Random.Range(0, ColorList.Count)].ColorID;
-        }
-    
-        public string GetAnswers(int i)
-        {
-            return null;
         }
       
 
