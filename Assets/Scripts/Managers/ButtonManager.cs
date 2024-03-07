@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using DATA;
 using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,61 +9,48 @@ namespace Managers
 {
     public class ButtonManager : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _buttonObjectList;
         [SerializeField] private List<Transform> _buttonPosition;
-        [SerializeField] private List<GameObject> _lastInstantiatedButton = new List<GameObject>();
-        [SerializeField] private List<int> _newInt; 
-    
-        private void Awake()
+        public static Action<ColorID> OnCheckAnswerEvent { get; set; }
+
+        private void OnEnable()
         {
-            ButtonToShuffle();
+            UIManager.OnButtonRandomEvent += ShuffleButtons;
         }
 
-        [Button]
-        public void TestShuffle()
+        private void OnDisable()
         {
-            _newInt.Shuffle();
+            UIManager.OnButtonRandomEvent -= ShuffleButtons;
         }
 
-        [Button]
-        public void ButtonToShuffle()
+
+        private void ShuffleButtons()
         {
-            List<Transform> availablePosition = new List<Transform>(_buttonPosition);
-
-            // foreach (GameObject button in _lastInstantiatedButton)
-            // {
-            //     Destroy(button);
-            // }
-            // _lastInstantiatedButton.Clear();
-
-            foreach (Transform child in transform)
+            _buttonPosition = new List<Transform>();
+            foreach ( Transform child  in transform)
             {
-                Destroy(child);
+                _buttonPosition.Add(child);
+               
             }
+            RandomButtons();
+            
+        }
+        private void RandomButtons()
+        {
+            for (int i = 0; i < _buttonPosition.Count; i++)
+            {
+                //for swapinp possitions in random range in child
+                int randomIndex = Random.Range(i, _buttonPosition.Count);
+                (_buttonPosition[randomIndex], _buttonPosition[i]) = (_buttonPosition[i], _buttonPosition[randomIndex]);
+            }
+            // Set the new order of child transforms
+            for (int i = 0; i < _buttonPosition.Count; i++)
+            {
+                _buttonPosition[i].SetSiblingIndex(i);
+            }
+        }
+
         
-            foreach (var buttonprefab in _buttonObjectList)
-            {
-          
-                //to avoid duplicate button possition
-                if (availablePosition.Count == 0)
-                {
-                    Debug.Log("not enough position for all buttons");
-                    return;
-                }
-                //Random
-                int randomIndex = Random.Range(0, availablePosition.Count);
-                var buttonsPosition = availablePosition[randomIndex];
-                //Instantiate
-                var currentButton = Instantiate(buttonprefab, gameObject.transform);
-                currentButton.transform.position = buttonsPosition.position;
-               // _lastInstantiatedButton.Add(currentButton);
-                availablePosition.RemoveAt(randomIndex);
-                
-           
-            }
-
-            Debug.Log("All Button is shuffled");
-        }
+        
         
     }
 }

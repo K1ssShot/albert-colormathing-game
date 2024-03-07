@@ -11,7 +11,7 @@ namespace GamePlay
 
         public void OnClickButton()
         {
-            _uiManager.CHeckAnswers(_colorID);
+            _uiManager.CheckAnswers(_colorID);
             Debug.Log($"Correct" + _colorID);
         }
 
