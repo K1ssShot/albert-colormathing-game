@@ -1,4 +1,4 @@
-using DATA;
+using NinetySix.DATA;
 using Managers;
 using UnityEngine;
 
@@ -11,12 +11,14 @@ namespace GamePlay
 
         public void OnClickButton()
         {
+            // once button is clicked by selecting the correct color 
             _uiManager.CheckAnswers(_colorID);
             Debug.Log($"Correct" + _colorID);
         }
 
         public void Inject(UIManager uiManager)
         {
+            //injecting this method to the UIManager 
             _uiManager = uiManager;
         }
     

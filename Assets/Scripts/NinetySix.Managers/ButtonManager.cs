@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using DATA;
+using NinetySix.DATA;
 using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,8 +10,7 @@ namespace Managers
     public class ButtonManager : MonoBehaviour
     {
         [SerializeField] private List<Transform> _buttonPosition;
-        public static Action<ColorID> OnCheckAnswerEvent { get; set; }
-
+        
         private void OnEnable()
         {
             UIManager.OnButtonRandomEvent += ShuffleButtons;
@@ -25,6 +24,7 @@ namespace Managers
 
         private void ShuffleButtons()
         {
+            //getting the position of child in parent 
             _buttonPosition = new List<Transform>();
             foreach ( Transform child  in transform)
             {

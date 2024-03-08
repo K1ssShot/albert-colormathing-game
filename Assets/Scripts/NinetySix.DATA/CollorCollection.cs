@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DATA
+namespace NinetySix.DATA
 {
-    [CreateAssetMenu (fileName = "QuestionMaker")]
+    [CreateAssetMenu (fileName = "CollorCollectionSO")]
     // ScriptableObject to store quiz data
-    public class QuizSO : ScriptableObject
+    public class CollorCollection : ScriptableObject
     {
         // List to store ColorData objects
         public List<ColorData> ColorList;
@@ -16,11 +16,13 @@ namespace DATA
         [SerializeField] private string Question = "Enter Question text ";
         public string GetQuestion()
         {
+            //Getting Question for the scriptable Object
             return Question;
         }
 
-        public ColorID GetrandomColor()
+        public ColorID GetRandomColorData()
         {
+            //getting the Random Color in enum
             return ColorList[Random.Range(0, ColorList.Count)].ColorID;
         }
       

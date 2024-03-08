@@ -1,20 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace DATA
+namespace NinetySix.DATA
 {
   
   [CreateAssetMenu (fileName = "ScoreSO")]
   public class ScoreSO : ScriptableObject
   {
     // Public variables to store current score and high score
-    public int Score = 0;
+    public int CurrentScore = 0;
     public int HighScore = 0;
 
     // Method to add points to the score
-    public void AddPoints(int ScoreAdd)
+    public void AddPoints(int scoreToAdd)
     {
-      // Implementation of adding points to the score
-      
+      CurrentScore += scoreToAdd;
+      if (CurrentScore > HighScore)
+      {
+        HighScore = CurrentScore;
+      }
+
     }
 
   }

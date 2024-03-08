@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace DATA {
+namespace NinetySix.DATA {
      
      // Enumeration to define different color IDs
      public enum ColorID
