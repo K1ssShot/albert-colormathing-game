@@ -9,10 +9,10 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _timertext;
-        [SerializeField] private CollorCollection _collorCollection;
-        [SerializeField] private List<Transform> _spriteSpawner;
-        private GameObject _currentColorSprite;
+        [SerializeField] private TextMeshProUGUI _timerText;
+        [SerializeField] private ColorCollection _colorCollection;
+        [SerializeField] private List<Transform> _spriteSpawnerList;
+        private GameObject _currentColorSpriteObject;
         public ColorID ColorSelection;
         public static Action OnGameStartEvent { get; set; }
 
@@ -38,26 +38,26 @@ namespace Managers
         public void ColorSelector()
         {
             // handles the color prefabs in game 
-            ColorSelection = _collorCollection.GetRandomColorData();
+            ColorSelection = _colorCollection.GetRandomColorData();
             Debug.Log("randomcolor is seleted " + ColorSelection);
             // finding the match color in scriptable object and random it 
-            var colorData = _collorCollection.ColorList.Find(x => x.ColorID == ColorSelection);
+            var colorData = _colorCollection.ColorList.Find(x => x.ColorID == ColorSelection);
             Debug.Log($"$Color is Selected{ColorSelection}-{colorData.ColorID}");
-            int randomIndex = UnityEngine.Random.Range(0, _spriteSpawner.Count);
-            Transform colorspawner = _spriteSpawner[randomIndex];
+            int randomIndex = UnityEngine.Random.Range(0, _spriteSpawnerList.Count);
+            Transform colorSpawner = _spriteSpawnerList[randomIndex];
 
-            _collorCollection.ColorDataID = ColorSelection;
+            _colorCollection.ColorDataID = ColorSelection;
 
             if (colorData != null)
             {
                 //spawning the new prefabs and deleting upon the selected color is correct
-                if (_currentColorSprite != null)
+                if (_currentColorSpriteObject != null)
                 {
-                    Destroy(_currentColorSprite);
+                    Destroy(_currentColorSpriteObject);
                 }
             }
 
-            _currentColorSprite = Instantiate(colorData.Color, colorspawner.position, Quaternion.identity);
+            _currentColorSpriteObject = Instantiate(colorData.Color, colorSpawner.position, Quaternion.identity);
         }
     }
 }

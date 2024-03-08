@@ -16,7 +16,7 @@ namespace GamePlay
             Debug.Log($"Correct" + _colorID);
         }
 
-        public void Inject(UIManager uiManager)
+        public void InjectUIManager(UIManager uiManager)
         {
             //injecting this method to the UIManager 
             _uiManager = uiManager;

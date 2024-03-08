@@ -5,14 +5,15 @@ using NinetySix.DATA;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PlayerSelect : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _currentScore;
-    [SerializeField] private TextMeshProUGUI _highScore;
+    [SerializeField] private TextMeshProUGUI _currentScoretext;
+    [SerializeField] private TextMeshProUGUI _highScoreText;
     [SerializeField] private ScoreSO _scoreSO;
     public GameObject ScoreBoard;
-
+    
     private void Start()
     {
         // starting the scorecounter upon starting game
@@ -22,9 +23,9 @@ public class PlayerSelect : MonoBehaviour
     public void ScoreCounter()
     {
         //for scorecounter in main menu
-        _currentScore.text = _scoreSO.CurrentScore.ToString();
+        _currentScoretext.text = _scoreSO.CurrentScore.ToString();
         _scoreSO.AddPoints(0);
-        _highScore.text = _scoreSO.HighScore.ToString();
+        _highScoreText.text = _scoreSO.HighScore.ToString();
         
     }
 

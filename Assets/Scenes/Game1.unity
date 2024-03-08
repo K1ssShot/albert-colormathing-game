@@ -793,15 +793,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4251e87819e109546919943907becbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questions: {fileID: 140476160}
+  _questionstext: {fileID: 140476160}
   _feedbacktext: {fileID: 1061614987}
   _timerText: {fileID: 853040732}
   _scoreText: {fileID: 929196788}
   _finalScoreText: {fileID: 1753610335}
   _currentScore: {fileID: 1221682890}
-  _gameOverScreen: {fileID: 1011350723}
-  _pauseScreen: {fileID: 1630196192}
-  _collorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}
+  _gameOverScreenObject: {fileID: 1011350723}
+  _pauseScreenObject: {fileID: 1630196192}
+  _colorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}
   _scoreSO: {fileID: 11400000, guid: f11ca7f3f8afe8a4e869d6c02175f725, type: 2}
   _startTime: 60
   _buttonManager: {fileID: 301236224}
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4965112ba220e634a97edf72bacc12c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonPosition:
+  _buttonPositionList:
   - {fileID: 746612125}
   - {fileID: 262245468}
   - {fileID: 1584671695}
@@ -2286,14 +2286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b8fca57dc8d464d9bd0205b48bdb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timertext: {fileID: 853040732}
-  _collorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}
-  _spriteSpawner:
+  _timerText: {fileID: 853040732}
+  _colorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}
+  _spriteSpawnerList:
   - {fileID: 2142655365}
   - {fileID: 1196278438}
   - {fileID: 862310180}
   - {fileID: 344377981}
-  colorSelection: 0
+  ColorSelection: 0
 --- !u!4 &923581602
 Transform:
   m_ObjectHideFlags: 0

@@ -12,15 +12,15 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         
-        [SerializeField] private TextMeshProUGUI _questions;
-        [SerializeField] private TextMeshProUGUI _feedbacktext;
+        [SerializeField] private TextMeshProUGUI _questionsText;
+        [SerializeField] private TextMeshProUGUI _feedbackText;
         [SerializeField] private TextMeshProUGUI _timerText;
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private TextMeshProUGUI _finalScoreText;
-        [SerializeField] private TextMeshProUGUI _currentScore;
-        [SerializeField] private GameObject _gameOverScreen;
-        [SerializeField] private GameObject _pauseScreen;
-        [SerializeField] private CollorCollection _collorCollection;
+        [SerializeField] private TextMeshProUGUI _currentScoreText; 
+        [SerializeField] private GameObject _gameOverScreenObject;
+        [SerializeField] private GameObject _pauseScreenObject;
+        [SerializeField] private ColorCollection _colorCollection;
         [SerializeField] private ScoreSO _scoreSO;
         [SerializeField] private float _startTime = 60f;
         [SerializeField] private ButtonManager _buttonManager;
@@ -48,12 +48,12 @@ namespace Managers
         
         private void Initialize()
         {
-            _questions.text = _collorCollection.GetQuestion();
+            _questionsText.text = _colorCollection.GetQuestion();
             _countdown = _startTime;
 
             foreach (Transform buttonChild in _buttonManager.transform)
             {
-                buttonChild.GetComponent<ButtonHandler>().Inject(this);
+                buttonChild.GetComponent<ButtonHandler>().InjectUIManager(this);
             }
         }
         
@@ -62,7 +62,7 @@ namespace Managers
         private void ScoreCount()
         {
             _scoreText.text = _scoreSO.CurrentScore.ToString();
-            _currentScore.text = _scoreSO.CurrentScore.ToString();
+            _currentScoreText.text = _scoreSO.CurrentScore.ToString();
             _finalScoreText.text = _scoreSO.CurrentScore.ToString();
             if (_scoreSO.CurrentScore <= 0)
             {
@@ -78,7 +78,7 @@ namespace Managers
 
             if (_countdown <= 0)
             {
-                _gameOverScreen.SetActive(true);
+                _gameOverScreenObject.SetActive(true);
                 _countdown = 0;
                 Debug.Log("GameOver");
             }
@@ -88,10 +88,10 @@ namespace Managers
         public void CheckAnswers(ColorID SelectedColorID)
         {
             //getting the selected color data in scriptable object 
-            if (SelectedColorID == _collorCollection.ColorDataID)
+            if (SelectedColorID == _colorCollection.ColorDataID)
             {
                 Debug.Log("CorrectAnswer minus points");
-                _feedbacktext.text = "Correct";
+                _feedbackText.text = "Correct";
                 OnColorSelectionEvent.Invoke();
                 _scoreSO.CurrentScore++;
                 OnButtonRandomEvent?.Invoke();
@@ -99,7 +99,7 @@ namespace Managers
             else
             {
                 Debug.Log("IncorrectAnswer");
-                _feedbacktext.text = "InCorrect";
+                _feedbackText.text = "InCorrect";
                 _scoreSO.CurrentScore--;
                 _countdown -= 5f;
             }
@@ -110,27 +110,27 @@ namespace Managers
         {
             //loads the main menu scene 
             SceneManager.LoadScene(levelName);
-            _gameOverScreen.SetActive(false);
+            _gameOverScreenObject.SetActive(false);
         }
 
         public void TryAgain(string levelName)
         {
             //loads the level 
             SceneManager.LoadScene(levelName);
-            _gameOverScreen.SetActive(false);
+            _gameOverScreenObject.SetActive(false);
         }
 
         public void PauseButton()
         {
             //pausing the game 
-         _pauseScreen.SetActive(true);
+         _pauseScreenObject.SetActive(true);
          Time.timeScale = 0;
         }
 
         public void PauseBackButton()
         {
             //unpause the game 
-            _pauseScreen.SetActive(false);
+            _pauseScreenObject.SetActive(false);
             Time.timeScale = 1;
         }
     }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using NinetySix.DATA;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Managers
 {
     public class ButtonManager : MonoBehaviour
     {
-        [SerializeField] private List<Transform> _buttonPosition;
+        [SerializeField] private List<Transform> _buttonPositionList;
         
         private void OnEnable()
         {
@@ -25,10 +26,10 @@ namespace Managers
         private void ShuffleButtons()
         {
             //getting the position of child in parent 
-            _buttonPosition = new List<Transform>();
+            _buttonPositionList = new List<Transform>();
             foreach ( Transform child  in transform)
             {
-                _buttonPosition.Add(child);
+                _buttonPositionList.Add(child);
                
             }
             RandomButtons();
@@ -36,16 +37,16 @@ namespace Managers
         }
         private void RandomButtons()
         {
-            for (int i = 0; i < _buttonPosition.Count; i++)
+            for (int i = 0; i < _buttonPositionList.Count; i++)
             {
                 //for swapinp possitions in random range in child
-                int randomIndex = Random.Range(i, _buttonPosition.Count);
-                (_buttonPosition[randomIndex], _buttonPosition[i]) = (_buttonPosition[i], _buttonPosition[randomIndex]);
+                int randomIndex = Random.Range(i, _buttonPositionList.Count);
+                (_buttonPositionList[randomIndex], _buttonPositionList[i]) = (_buttonPositionList[i], _buttonPositionList[randomIndex]);
             }
             // Set the new order of child transforms
-            for (int i = 0; i < _buttonPosition.Count; i++)
+            for (int i = 0; i < _buttonPositionList.Count; i++)
             {
-                _buttonPosition[i].SetSiblingIndex(i);
+                _buttonPositionList[i].SetSiblingIndex(i);
             }
         }
 

@@ -1098,8 +1098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308708acaaf86ff47b43077b61dc587e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentScore: {fileID: 947018313}
-  _highScore: {fileID: 2097668007}
+  _currentScoretext: {fileID: 947018313}
+  _highScoretext: {fileID: 2097668007}
   _scoreSO: {fileID: 11400000, guid: f11ca7f3f8afe8a4e869d6c02175f725, type: 2}
   ScoreBoard: {fileID: 1528319421}
 --- !u!1 &1152659580
@@ -1402,7 +1402,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1046863555}
         m_TargetAssemblyTypeName: PlayerSelect, Assembly-CSharp
-        m_MethodName: BackButton
+        m_MethodName: ScoreBackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
