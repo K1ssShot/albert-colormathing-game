@@ -43,7 +43,6 @@ namespace NinetySix.Managers
                 int randomIndex = Random.Range(i, _buttonPositionList.Count);
                 
                 //positioning the random position
-                _buttonPositionList[randomIndex] = _buttonPositionList[i];
                 _buttonPositionList[i] = _buttonPositionList[randomIndex];
                 Debug.Log($"{i} {_buttonPositionList.Count}");
                 
