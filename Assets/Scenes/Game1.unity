@@ -793,12 +793,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4251e87819e109546919943907becbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questionstext: {fileID: 140476160}
-  _feedbacktext: {fileID: 1061614987}
+  _questionsText: {fileID: 140476160}
+  _feedbackText: {fileID: 1061614987}
   _timerText: {fileID: 853040732}
   _scoreText: {fileID: 929196788}
   _finalScoreText: {fileID: 1753610335}
-  _currentScore: {fileID: 1221682890}
+  _currentScoreText: {fileID: 1221682890}
   _gameOverScreenObject: {fileID: 1011350723}
   _pauseScreenObject: {fileID: 1630196192}
   _colorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}

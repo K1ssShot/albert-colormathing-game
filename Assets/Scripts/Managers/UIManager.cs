@@ -1,13 +1,13 @@
 using System;
 using NinetySix.DATA;
-using GamePlay;
+using NinetySix.GamePlay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 
-namespace Managers
+namespace NinetySix.Managers
 {
     public class UIManager : MonoBehaviour
     {
@@ -51,10 +51,10 @@ namespace Managers
             _questionsText.text = _colorCollection.GetQuestion();
             _countdown = _startTime;
 
-            foreach (Transform buttonChild in _buttonManager.transform)
-            {
-                buttonChild.GetComponent<ButtonHandler>().InjectUIManager(this);
-            }
+             foreach (Transform buttonChild in _buttonManager.transform)
+             {
+                 buttonChild.GetComponent<ButtonHandler>().InjectUIManager(this);
+             }
         }
         
 
@@ -85,10 +85,10 @@ namespace Managers
         }
 
 
-        public void CheckAnswers(ColorID SelectedColorID)
+        public void CheckAnswers(ColorID selectedColorID)
         {
             //getting the selected color data in scriptable object 
-            if (SelectedColorID == _colorCollection.ColorDataID)
+            if (selectedColorID == _colorCollection.ColorDataID)
             {
                 Debug.Log("CorrectAnswer minus points");
                 _feedbackText.text = "Correct";
@@ -108,6 +108,7 @@ namespace Managers
 
         public void MainMenu(string levelName)
         {
+            
             //loads the main menu scene 
             SceneManager.LoadScene(levelName);
             _gameOverScreenObject.SetActive(false);
@@ -115,9 +116,11 @@ namespace Managers
 
         public void TryAgain(string levelName)
         {
+            _scoreSO.CurrentScore = 0;
             //loads the level 
             SceneManager.LoadScene(levelName);
             _gameOverScreenObject.SetActive(false);
+            
         }
 
         public void PauseButton()

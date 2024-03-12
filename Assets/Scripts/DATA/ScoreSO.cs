@@ -17,7 +17,9 @@ namespace NinetySix.DATA
       CurrentScore += scoreToAdd;
       if (CurrentScore > HighScore)
       {
+        //change the highscorepoints when the current score is higher than high score
         HighScore = CurrentScore;
+        
       }
 
     }

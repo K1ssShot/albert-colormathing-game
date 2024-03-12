@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace Managers
+namespace NinetySix.Managers
 {
     public class ButtonManager : MonoBehaviour
     {
@@ -39,9 +39,14 @@ namespace Managers
         {
             for (int i = 0; i < _buttonPositionList.Count; i++)
             {
-                //for swapinp possitions in random range in child
+                //for Getting random possitions in random range in child
                 int randomIndex = Random.Range(i, _buttonPositionList.Count);
-                (_buttonPositionList[randomIndex], _buttonPositionList[i]) = (_buttonPositionList[i], _buttonPositionList[randomIndex]);
+                
+                //positioning the random position
+                _buttonPositionList[randomIndex] = _buttonPositionList[i];
+                _buttonPositionList[i] = _buttonPositionList[randomIndex];
+                Debug.Log($"{i} {_buttonPositionList.Count}");
+                
             }
             // Set the new order of child transforms
             for (int i = 0; i < _buttonPositionList.Count; i++)

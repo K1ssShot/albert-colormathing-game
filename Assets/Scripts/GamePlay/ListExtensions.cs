@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public static class ListExtensions 
+namespace NinetySix.DATAGamePlay
 {
+    public static class ListExtensions 
+    {
         public static void Shuffle<T>(this IList<T> list)
         {
             // int n = list.Count;
@@ -16,3 +16,4 @@ public static class ListExtensions
             
         }
     }
+}

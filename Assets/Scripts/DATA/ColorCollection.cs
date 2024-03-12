@@ -26,6 +26,7 @@ namespace NinetySix.DATA
         {
             //getting the Random Color in enum
             return ColorList[Random.Range(0, ColorList.Count)].ColorID;
+            
         }
       
 

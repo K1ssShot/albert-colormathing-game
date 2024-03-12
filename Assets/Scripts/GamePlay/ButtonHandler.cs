@@ -1,8 +1,8 @@
 using NinetySix.DATA;
-using Managers;
+using NinetySix.Managers;
 using UnityEngine;
 
-namespace GamePlay
+namespace NinetySix.GamePlay
 {
     public class ButtonHandler : MonoBehaviour
     {
