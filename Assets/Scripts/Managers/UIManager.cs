@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 
 namespace NinetySix.Managers
@@ -23,7 +24,7 @@ namespace NinetySix.Managers
         [SerializeField] private ColorCollection _colorCollection;
         [SerializeField] private ScoreSO _scoreSO;
         [SerializeField] private float _startTime = 60f;
-        [SerializeField] private ButtonManager _buttonManager;
+        [SerializeField] private Transform _buttonContainer;
         private float _countdown = 0f;
         public static Action OnButtonRandomEvent { get; set; }
         public static Action OnColorSelectionEvent { get; set; }
@@ -51,7 +52,7 @@ namespace NinetySix.Managers
             _questionsText.text = _colorCollection.GetQuestion();
             _countdown = _startTime;
 
-             foreach (Transform buttonChild in _buttonManager.transform)
+             foreach (Transform buttonChild in _buttonContainer.transform)
              {
                  buttonChild.GetComponent<ButtonHandler>().InjectUIManager(this);
              }
@@ -83,6 +84,8 @@ namespace NinetySix.Managers
                 Debug.Log("GameOver");
             }
         }
+        
+        
 
 
         public void CheckAnswers(ColorID selectedColorID)
@@ -94,7 +97,8 @@ namespace NinetySix.Managers
                 _feedbackText.text = "Correct";
                 OnColorSelectionEvent.Invoke();
                 _scoreSO.CurrentScore++;
-                OnButtonRandomEvent?.Invoke();
+                //OnButtonRandomEvent?.Invoke();
+                RandomButtons();
             }
             else
             {
@@ -135,6 +139,29 @@ namespace NinetySix.Managers
             //unpause the game 
             _pauseScreenObject.SetActive(false);
             Time.timeScale = 1;
+        }
+        public void RandomButtons() 
+        {
+            for (int i = 0; i < _buttonContainer.childCount; i++)
+            {
+                //for Getting random index within the range of child elemernts
+                int randomIndex = Random.Range(i, _buttonContainer.childCount);
+                //getting the child transform at the random index
+                Transform childTransform = _buttonContainer.GetChild(randomIndex);
+                //setting the siblings index of the child transform to the current index 
+                childTransform.SetSiblingIndex(i);
+                // Debug.Log($"{i} {_buttonPositionList.Count}");
+                
+                //positioning the random position
+                // _buttonPositionList[randomIndex] = _buttonPositionList[i];
+                //  _buttonPositionList[i] = _buttonPositionList[randomIndex];
+                
+            }
+            // Set the new order of child transforms
+            // for (int i = 0; i < _buttonPositionList.Count; i++)
+            // {
+            //     _buttonPositionList[i].SetSiblingIndex(i);
+            // }
         }
     }
 }

@@ -14,44 +14,49 @@ namespace NinetySix.Managers
         
         private void OnEnable()
         {
-            UIManager.OnButtonRandomEvent += ShuffleButtons;
+            UIManager.OnButtonRandomEvent += GetButtons;
         }
 
         private void OnDisable()
         {
-            UIManager.OnButtonRandomEvent -= ShuffleButtons;
+            UIManager.OnButtonRandomEvent -= GetButtons;
         }
 
 
-        private void ShuffleButtons()
+        private void GetButtons()
         {
             //getting the position of child in parent 
-            _buttonPositionList = new List<Transform>();
-            foreach ( Transform child  in transform)
-            {
-                _buttonPositionList.Add(child);
-               
-            }
+            // _buttonPositionList = new List<Transform>();
+            // foreach ( Transform child  in transform)
+            // {
+            //     _buttonPositionList.Add(child);
+            //    
+            // }
             RandomButtons();
             
         }
-        private void RandomButtons()
+        private void RandomButtons() 
         {
-            for (int i = 0; i < _buttonPositionList.Count; i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
-                //for Getting random possitions in random range in child
-                int randomIndex = Random.Range(i, _buttonPositionList.Count);
+                //for Getting random index within the range of child elemernts
+                int randomIndex = Random.Range(i, transform.childCount);
+                //getting the child transform at the random index
+                Transform childTransform = transform.GetChild(randomIndex);
+                //setting the siblings index of the child transform to the current index 
+                childTransform.SetSiblingIndex(i);
+                // Debug.Log($"{i} {_buttonPositionList.Count}");
                 
                 //positioning the random position
-                _buttonPositionList[i] = _buttonPositionList[randomIndex];
-                Debug.Log($"{i} {_buttonPositionList.Count}");
+               // _buttonPositionList[randomIndex] = _buttonPositionList[i];
+              //  _buttonPositionList[i] = _buttonPositionList[randomIndex];
                 
             }
             // Set the new order of child transforms
-            for (int i = 0; i < _buttonPositionList.Count; i++)
-            {
-                _buttonPositionList[i].SetSiblingIndex(i);
-            }
+            // for (int i = 0; i < _buttonPositionList.Count; i++)
+            // {
+            //     _buttonPositionList[i].SetSiblingIndex(i);
+            // }
         }
 
         

@@ -598,6 +598,18 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9165940691211633573, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 746612126}
+    - target: {fileID: 9165940691211633573, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165940691211633573, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NinetySix.GamePlay.ButtonHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -804,7 +816,7 @@ MonoBehaviour:
   _colorCollection: {fileID: 11400000, guid: 020d27c2db5fe2c489e21ad13092e966, type: 2}
   _scoreSO: {fileID: 11400000, guid: f11ca7f3f8afe8a4e869d6c02175f725, type: 2}
   _startTime: 60
-  _buttonManager: {fileID: 301236224}
+  _buttonContainer: {fileID: 301236222}
 --- !u!224 &262245468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2063519865639932888, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
@@ -819,10 +831,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 301236222}
-  - component: {fileID: 301236224}
   - component: {fileID: 301236225}
   m_Layer: 5
-  m_Name: ButtonManager
+  m_Name: ButtonContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,23 +862,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 141.655}
   m_SizeDelta: {x: 0, y: 283.31}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &301236224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301236221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4965112ba220e634a97edf72bacc12c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonPositionList:
-  - {fileID: 746612125}
-  - {fileID: 262245468}
-  - {fileID: 1584671695}
-  - {fileID: 1765066518}
 --- !u!114 &301236225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,6 +1819,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2063519865639932888, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
   m_PrefabInstance: {fileID: 154597750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &746612126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7539201759061460509, guid: 94899782d82441d43a6b80d2ea49d1bb, type: 3}
+  m_PrefabInstance: {fileID: 154597750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eab5f9bff021004c8861c59ef61d5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &797376003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,7 +2298,8 @@ MonoBehaviour:
   - {fileID: 1196278438}
   - {fileID: 862310180}
   - {fileID: 344377981}
-  ColorSelection: 0
+  _currentColorSpriteObject: {fileID: 0}
+  ColorID: 0
 --- !u!4 &923581602
 Transform:
   m_ObjectHideFlags: 0
