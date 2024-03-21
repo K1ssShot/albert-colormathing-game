@@ -15,15 +15,15 @@ MonoBehaviour:
   ColorList:
   - ColorID: 0
     ColorName: Mr red
-    Color: {fileID: 7955337685513834492, guid: 5fb2fad5e01c4e5429e2eeac98fafc96, type: 3}
+    Colour: {r: 1, g: 0, b: 0, a: 1}
   - ColorID: 1
     ColorName: mr Blue
-    Color: {fileID: 2536157936972031567, guid: fcbd130ce91498042b5c34b96d708e8d, type: 3}
+    Colour: {r: 0, g: 0, b: 1, a: 1}
   - ColorID: 2
     ColorName: mr Green
-    Color: {fileID: 3391195677239360451, guid: b4add0fbaa569a6428c1a46a4f05d212, type: 3}
+    Colour: {r: 0, g: 1, b: 0, a: 1}
   - ColorID: 3
     ColorName: mr yellow
-    Color: {fileID: 3241501296725916534, guid: 0cf6848b576a5474b933c57e9bdc6a82, type: 3}
-  ColorDataID: 0
-  Question: What is the Color of this Shape?
+    Colour: {r: 0.8941177, g: 0.9607844, b: 0, a: 1}
+  ColorDataID: 3
+  _question: What is the Color of this Shape?

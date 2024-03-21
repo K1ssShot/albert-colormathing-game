@@ -1,3 +1,4 @@
+using System;
 using NinetySix.DATA;
 using NinetySix.Managers;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace NinetySix.GamePlay
     public class ButtonHandler : MonoBehaviour
     {
         [SerializeField] private UIManager _uiManager;
-        [SerializeField] private ColorID _colorID ;
+        [SerializeField] public ColorID _colorID ;
+        
 
         public void OnClickButton()
         {

@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using NinetySix.DATA;
 using NinetySix.GamePlay;
 using TMPro;
@@ -21,18 +22,18 @@ namespace NinetySix.Managers
         [SerializeField] private TextMeshProUGUI _currentScoreText; 
         [SerializeField] private GameObject _gameOverScreenObject;
         [SerializeField] private GameObject _pauseScreenObject;
-        [SerializeField] private ColorCollection _colorCollection;
+        [SerializeField] private ColorCollectionSO _colorCollectionSO;
         [SerializeField] private ScoreSO _scoreSO;
-        [SerializeField] private float _startTime = 60f;
-        [SerializeField] private Transform _buttonContainer;
-        private float _countdown = 0f;
-        public static Action OnButtonRandomEvent { get; set; }
+        [SerializeField] private float _startTime = 60;
+        public Transform _buttonContainer;
+         private float _countdown = 0f;
+        public static Action OnDestroyEvent { get; set; }
         public static Action OnColorSelectionEvent { get; set; }
 
         private void OnEnable()
         {
             GameManager.OnGameStartEvent += Initialize;
-            
+
         }
 
         private void OnDisable()
@@ -45,11 +46,12 @@ namespace NinetySix.Managers
         {
             ScoreCount();
             Countdown();
+            
         }
-        
+        [Button]
         private void Initialize()
         {
-            _questionsText.text = _colorCollection.GetQuestion();
+            _questionsText.text = _colorCollectionSO.GetQuestion();
             _countdown = _startTime;
 
              foreach (Transform buttonChild in _buttonContainer.transform)
@@ -65,6 +67,7 @@ namespace NinetySix.Managers
             _scoreText.text = _scoreSO.CurrentScore.ToString();
             _currentScoreText.text = _scoreSO.CurrentScore.ToString();
             _finalScoreText.text = _scoreSO.CurrentScore.ToString();
+            
             if (_scoreSO.CurrentScore <= 0)
             {
                 _scoreSO.CurrentScore = 0;
@@ -76,7 +79,6 @@ namespace NinetySix.Managers
             //for timer countdown in in the level
             _timerText.text = _countdown.ToString("0");
             _countdown -= 1 * Time.deltaTime;
-
             if (_countdown <= 0)
             {
                 _gameOverScreenObject.SetActive(true);
@@ -91,18 +93,19 @@ namespace NinetySix.Managers
         public void CheckAnswers(ColorID selectedColorID)
         {
             //getting the selected color data in scriptable object 
-            if (selectedColorID == _colorCollection.ColorDataID)
+            if (selectedColorID == _colorCollectionSO.ColorDataID)
             {
-                Debug.Log("CorrectAnswer minus points");
+                Debug.Log("CorrectAnswer plus points");
                 _feedbackText.text = "Correct";
-                OnColorSelectionEvent.Invoke();
                 _scoreSO.CurrentScore++;
-                //OnButtonRandomEvent?.Invoke();
                 RandomButtons();
+                OnDestroyEvent?.Invoke();
+                OnColorSelectionEvent?.Invoke();
+                
             }
             else
             {
-                Debug.Log("IncorrectAnswer");
+                Debug.Log("IncorrectAnswer minus points");
                 _feedbackText.text = "InCorrect";
                 _scoreSO.CurrentScore--;
                 _countdown -= 5f;
@@ -150,18 +153,18 @@ namespace NinetySix.Managers
                 Transform childTransform = _buttonContainer.GetChild(randomIndex);
                 //setting the siblings index of the child transform to the current index 
                 childTransform.SetSiblingIndex(i);
-                // Debug.Log($"{i} {_buttonPositionList.Count}");
-                
-                //positioning the random position
-                // _buttonPositionList[randomIndex] = _buttonPositionList[i];
-                //  _buttonPositionList[i] = _buttonPositionList[randomIndex];
+               // Debug.Log($"{i}");
                 
             }
-            // Set the new order of child transforms
-            // for (int i = 0; i < _buttonPositionList.Count; i++)
-            // {
-            //     _buttonPositionList[i].SetSiblingIndex(i);
-            // }
+        }
+        
+        public void TestRandomRange()
+        {
+            int min = 0;
+            int max = 5;
+            int result = max + 1 - Random.Range(min, max + 1);
+            
+            Debug.Log($"{result}");
         }
     }
 }
